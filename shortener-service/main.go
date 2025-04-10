@@ -11,7 +11,10 @@ import (
 )
 
 func main() {
-	godotenv.Load(".env")
+	enverr := godotenv.Load(".env")
+	if enverr != nil {
+		log.Fatal("Error loading .env file")
+	}
 	db, err := repository.InitDB()
 	if err != nil {
 		log.Fatal("DB Connection Failed: ", err)
