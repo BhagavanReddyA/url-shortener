@@ -1,0 +1,22 @@
+# Binaries
+main
+*.exe
+*.out
+
+# Vendor folders (if you use vendoring)
+vendor/
+
+# Build output
+*.log
+*.tmp
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
