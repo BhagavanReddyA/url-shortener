@@ -25,6 +25,12 @@ func (h *URLHandler) ShortenURL(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
 		return
 	}
+	ExpiredCodeDeletionErr := h.Repo.DeleteExpiredURLS()
+	if ExpiredCodeDeletionErr != nil {
+		log.Println("Failed to Delete the issues.")
+		c.JSON(http.StatusNotImplemented, gin.H{"error": "Failed to delete the expired issues"})
+		return
+	}
 	existingShortCode, err := h.Repo.GetShortCodeByOriginalURL(req.OriginalURL)
 	if err == nil {
 		existingShortCodeRes := model.URLResponse{
