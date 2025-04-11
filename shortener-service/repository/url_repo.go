@@ -44,9 +44,8 @@ func (repo *URLRepository) GetShortCodeByOriginalURL(OriginalURL string) (string
 }
 
 func (repo *URLRepository) DeleteExpiredURLS() error {
-	expirationTime := time.Now().Add(24 * time.Hour)
-	FormattedExpirationTime := expirationTime.Format("2006-01-02 15:04:05")
-	_, err := repo.DB.Exec("DELETE FROM urls WHERE expiration_date >= ?", FormattedExpirationTime)
+	expirationTime := time.Now().Format("2006-01-02 15:04:05")
+	_, err := repo.DB.Exec("DELETE FROM urls WHERE expiration_date <= ?", expirationTime)
 	log.Println("the error is: ", err)
 	return err
 }
